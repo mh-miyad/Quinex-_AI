@@ -1,13 +1,11 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import { Toaster } from '@/components/ui/sonner';
-
-const inter = Inter({ subsets: ['latin'] });
+import { Toaster } from "@/components/ui/sonner";
+import type { Metadata } from "next";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: 'Quinex - AI-Powered Real Estate Platform',
-  description: 'Revolutionary property transactions platform for South Asian markets with AI-powered valuations, lead scoring, and matchmaking.',
+  title: "Quinex - AI-Powered Real Estate Platform",
+  description:
+    "Revolutionary property transactions platform for South Asian markets with AI-powered valuations, lead scoring, and matchmaking.",
 };
 
 export default function RootLayout({
@@ -17,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         {children}
         <Toaster />
       </body>
