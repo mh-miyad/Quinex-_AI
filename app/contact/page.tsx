@@ -1,47 +1,53 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { PublicHeader } from '@/components/layout/public-header';
-import { Footer } from '@/components/public/footer';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { toast } from 'sonner';
+import { PublicHeader } from "@/components/layout/public-header";
+import { Footer } from "@/components/publicComp/footer";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
-  Mail,
-  Phone,
-  MapPin,
-  Clock,
-  Send,
-  MessageSquare,
-  Headphones,
-  Globe,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { motion } from "framer-motion";
+import {
   Building2,
+  CheckCircle,
+  Clock,
+  Globe,
+  Headphones,
+  Loader2,
+  Mail,
+  MapPin,
+  MessageSquare,
+  Phone,
+  Send,
   Users,
   Zap,
-  CheckCircle,
-  Loader2,
-} from 'lucide-react';
+} from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    phone: '',
-    subject: '',
-    message: '',
-    inquiryType: '',
+    name: "",
+    email: "",
+    company: "",
+    phone: "",
+    subject: "",
+    message: "",
+    inquiryType: "",
   });
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -49,30 +55,30 @@ export default function ContactPage() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
+      const response = await fetch("/api/contact", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
-        toast.success('Message sent successfully! We\'ll get back to you soon.');
+        toast.success("Message sent successfully! We'll get back to you soon.");
         setFormData({
-          name: '',
-          email: '',
-          company: '',
-          phone: '',
-          subject: '',
-          message: '',
-          inquiryType: '',
+          name: "",
+          email: "",
+          company: "",
+          phone: "",
+          subject: "",
+          message: "",
+          inquiryType: "",
         });
       } else {
-        throw new Error('Failed to send message');
+        throw new Error("Failed to send message");
       }
     } catch (error) {
-      toast.error('Failed to send message. Please try again.');
+      toast.error("Failed to send message. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -81,70 +87,70 @@ export default function ContactPage() {
   const contactMethods = [
     {
       icon: Mail,
-      title: 'Email Us',
-      description: 'Send us an email and we\'ll respond within 24 hours',
-      contact: 'hello@quinex.ai',
-      action: 'mailto:hello@quinex.ai',
+      title: "Email Us",
+      description: "Send us an email and we'll respond within 24 hours",
+      contact: "hello@quinex.ai",
+      action: "mailto:hello@quinex.ai",
     },
     {
       icon: Phone,
-      title: 'Call Us',
-      description: 'Speak directly with our team during business hours',
-      contact: '+1 (555) 123-4567',
-      action: 'tel:+15551234567',
+      title: "Call Us",
+      description: "Speak directly with our team during business hours",
+      contact: "+1 (555) 123-4567",
+      action: "tel:+15551234567",
     },
     {
       icon: MessageSquare,
-      title: 'Live Chat',
-      description: 'Get instant help with our live chat support',
-      contact: 'Available 24/7',
-      action: '#',
+      title: "Live Chat",
+      description: "Get instant help with our live chat support",
+      contact: "Available 24/7",
+      action: "#",
     },
     {
       icon: Headphones,
-      title: 'Support Center',
-      description: 'Browse our knowledge base and documentation',
-      contact: 'help.quinex.ai',
-      action: 'https://help.quinex.ai',
+      title: "Support Center",
+      description: "Browse our knowledge base and documentation",
+      contact: "help.quinex.ai",
+      action: "https://help.quinex.ai",
     },
   ];
 
   const offices = [
     {
-      city: 'San Francisco',
-      address: '123 Market Street, Suite 400',
-      country: 'United States',
-      phone: '+1 (555) 123-4567',
-      email: 'sf@quinex.ai',
-      timezone: 'PST',
+      city: "San Francisco",
+      address: "123 Market Street, Suite 400",
+      country: "United States",
+      phone: "+1 (555) 123-4567",
+      email: "sf@quinex.ai",
+      timezone: "PST",
     },
     {
-      city: 'London',
-      address: '456 Oxford Street, Floor 5',
-      country: 'United Kingdom',
-      phone: '+44 20 7123 4567',
-      email: 'london@quinex.ai',
-      timezone: 'GMT',
+      city: "London",
+      address: "456 Oxford Street, Floor 5",
+      country: "United Kingdom",
+      phone: "+44 20 7123 4567",
+      email: "london@quinex.ai",
+      timezone: "GMT",
     },
     {
-      city: 'Singapore',
-      address: '789 Orchard Road, Level 12',
-      country: 'Singapore',
-      phone: '+65 6123 4567',
-      email: 'singapore@quinex.ai',
-      timezone: 'SGT',
+      city: "Singapore",
+      address: "789 Orchard Road, Level 12",
+      country: "Singapore",
+      phone: "+65 6123 4567",
+      email: "singapore@quinex.ai",
+      timezone: "SGT",
     },
   ];
 
   const inquiryTypes = [
-    'General Inquiry',
-    'Sales & Pricing',
-    'Technical Support',
-    'Partnership',
-    'Media & Press',
-    'Careers',
-    'Feature Request',
-    'Bug Report',
+    "General Inquiry",
+    "Sales & Pricing",
+    "Technical Support",
+    "Partnership",
+    "Media & Press",
+    "Careers",
+    "Feature Request",
+    "Bug Report",
   ];
 
   const containerVariants = {
@@ -164,7 +170,7 @@ export default function ContactPage() {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: 'easeOut',
+        ease: "easeOut",
       },
     },
   };
@@ -172,7 +178,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-white">
       <PublicHeader />
-      
+
       <main className="pt-16">
         {/* Hero Section */}
         <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
@@ -186,23 +192,24 @@ export default function ContactPage() {
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+                transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
                 className="inline-flex items-center gap-2 bg-black text-white px-4 py-2 rounded-full text-sm font-medium mb-6"
               >
                 <MessageSquare className="h-4 w-4" />
-                We're here to help
+                {` We're here to help`}
               </motion.div>
-              
+
               <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-                Get in{' '}
+                Get in{" "}
                 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   touch
                 </span>
               </h1>
-              
+
               <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-                Have questions about Quinex? Want to see a demo? Or just want to say hello? 
-                We'd love to hear from you.
+                Have questions about Quinex? Want to see a demo? Or just want to
+                say hello?
+                {`     We'd love to hear from you.`}
               </p>
 
               <motion.div
@@ -286,9 +293,12 @@ export default function ContactPage() {
               >
                 <Card className="shadow-xl">
                   <CardHeader>
-                    <CardTitle className="text-2xl font-bold">Send us a message</CardTitle>
+                    <CardTitle className="text-2xl font-bold">
+                      Send us a message
+                    </CardTitle>
                     <p className="text-gray-600">
-                      Fill out the form below and we'll get back to you as soon as possible.
+                      Fill out the form below and {`we'll `}get back to you as
+                      soon as possible.
                     </p>
                   </CardHeader>
                   <CardContent>
@@ -300,7 +310,9 @@ export default function ContactPage() {
                             id="name"
                             placeholder="Your full name"
                             value={formData.name}
-                            onChange={(e) => handleInputChange('name', e.target.value)}
+                            onChange={(e) =>
+                              handleInputChange("name", e.target.value)
+                            }
                             required
                           />
                         </div>
@@ -311,7 +323,9 @@ export default function ContactPage() {
                             type="email"
                             placeholder="your@email.com"
                             value={formData.email}
-                            onChange={(e) => handleInputChange('email', e.target.value)}
+                            onChange={(e) =>
+                              handleInputChange("email", e.target.value)
+                            }
                             required
                           />
                         </div>
@@ -324,7 +338,9 @@ export default function ContactPage() {
                             id="company"
                             placeholder="Your company name"
                             value={formData.company}
-                            onChange={(e) => handleInputChange('company', e.target.value)}
+                            onChange={(e) =>
+                              handleInputChange("company", e.target.value)
+                            }
                           />
                         </div>
                         <div className="space-y-2">
@@ -333,14 +349,21 @@ export default function ContactPage() {
                             id="phone"
                             placeholder="+1 (555) 123-4567"
                             value={formData.phone}
-                            onChange={(e) => handleInputChange('phone', e.target.value)}
+                            onChange={(e) =>
+                              handleInputChange("phone", e.target.value)
+                            }
                           />
                         </div>
                       </div>
 
                       <div className="space-y-2">
                         <Label htmlFor="inquiryType">Inquiry Type</Label>
-                        <Select value={formData.inquiryType} onValueChange={(value) => handleInputChange('inquiryType', value)}>
+                        <Select
+                          value={formData.inquiryType}
+                          onValueChange={(value) =>
+                            handleInputChange("inquiryType", value)
+                          }
+                        >
                           <SelectTrigger>
                             <SelectValue placeholder="Select inquiry type" />
                           </SelectTrigger>
@@ -360,7 +383,9 @@ export default function ContactPage() {
                           id="subject"
                           placeholder="What's this about?"
                           value={formData.subject}
-                          onChange={(e) => handleInputChange('subject', e.target.value)}
+                          onChange={(e) =>
+                            handleInputChange("subject", e.target.value)
+                          }
                           required
                         />
                       </div>
@@ -372,7 +397,9 @@ export default function ContactPage() {
                           placeholder="Tell us more about your inquiry..."
                           rows={5}
                           value={formData.message}
-                          onChange={(e) => handleInputChange('message', e.target.value)}
+                          onChange={(e) =>
+                            handleInputChange("message", e.target.value)
+                          }
                           required
                         />
                       </div>
@@ -417,12 +444,12 @@ export default function ContactPage() {
                   </h3>
                   <div className="space-y-4">
                     {[
-                      'AI-powered property valuations with 95% accuracy',
-                      'Global support for 50+ countries',
-                      'Enterprise-grade security and compliance',
-                      '24/7 customer support and assistance',
-                      'Seamless integrations with existing tools',
-                      'Continuous innovation and updates',
+                      "AI-powered property valuations with 95% accuracy",
+                      "Global support for 50+ countries",
+                      "Enterprise-grade security and compliance",
+                      "24/7 customer support and assistance",
+                      "Seamless integrations with existing tools",
+                      "Continuous innovation and updates",
                     ].map((feature, index) => (
                       <motion.div
                         key={index}
@@ -443,7 +470,8 @@ export default function ContactPage() {
                     Need immediate assistance?
                   </h4>
                   <p className="text-gray-600 mb-4">
-                    Our support team is available 24/7 to help you with any urgent questions or issues.
+                    Our support team is available 24/7 to help you with any
+                    urgent questions or issues.
                   </p>
                   <Button variant="outline" className="w-full">
                     <Zap className="mr-2 h-4 w-4" />
@@ -464,9 +492,12 @@ export default function ContactPage() {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Global Offices</h2>
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+                Our Global Offices
+              </h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                We have teams around the world to provide you with local support and expertise
+                We have teams around the world to provide you with local support
+                and expertise
               </p>
             </motion.div>
 
@@ -493,11 +524,13 @@ export default function ContactPage() {
                       <Building2 className="h-6 w-6 text-white" />
                     </motion.div>
                     <div>
-                      <h3 className="text-lg font-bold text-gray-900">{office.city}</h3>
+                      <h3 className="text-lg font-bold text-gray-900">
+                        {office.city}
+                      </h3>
                       <p className="text-gray-600 text-sm">{office.country}</p>
                     </div>
                   </div>
-                  
+
                   <div className="space-y-3 text-sm">
                     <div className="flex items-start gap-2">
                       <MapPin className="h-4 w-4 text-gray-400 mt-0.5 flex-shrink-0" />
@@ -513,7 +546,9 @@ export default function ContactPage() {
                     </div>
                     <div className="flex items-center gap-2">
                       <Clock className="h-4 w-4 text-gray-400" />
-                      <span className="text-gray-600">Timezone: {office.timezone}</span>
+                      <span className="text-gray-600">
+                        Timezone: {office.timezone}
+                      </span>
                     </div>
                   </div>
                 </motion.div>
@@ -548,28 +583,34 @@ export default function ContactPage() {
             >
               {[
                 {
-                  question: 'How quickly can I get started?',
-                  answer: 'You can sign up and start using Quinex immediately. Our onboarding process takes less than 5 minutes.',
+                  question: "How quickly can I get started?",
+                  answer:
+                    "You can sign up and start using Quinex immediately. Our onboarding process takes less than 5 minutes.",
                 },
                 {
-                  question: 'Do you offer training and support?',
-                  answer: 'Yes! We provide comprehensive training materials, live onboarding sessions, and 24/7 support.',
+                  question: "Do you offer training and support?",
+                  answer:
+                    "Yes! We provide comprehensive training materials, live onboarding sessions, and 24/7 support.",
                 },
                 {
-                  question: 'Can I integrate with my existing tools?',
-                  answer: 'Absolutely. Quinex integrates with popular CRM systems, email platforms, and other real estate tools.',
+                  question: "Can I integrate with my existing tools?",
+                  answer:
+                    "Absolutely. Quinex integrates with popular CRM systems, email platforms, and other real estate tools.",
                 },
                 {
-                  question: 'Is my data secure?',
-                  answer: 'Yes, we use enterprise-grade security with 256-bit encryption and are SOC 2 compliant.',
+                  question: "Is my data secure?",
+                  answer:
+                    "Yes, we use enterprise-grade security with 256-bit encryption and are SOC 2 compliant.",
                 },
                 {
-                  question: 'Do you offer custom solutions?',
-                  answer: 'Yes, we work with enterprise clients to create custom solutions that fit their specific needs.',
+                  question: "Do you offer custom solutions?",
+                  answer:
+                    "Yes, we work with enterprise clients to create custom solutions that fit their specific needs.",
                 },
                 {
-                  question: 'What countries do you support?',
-                  answer: 'We currently support 50+ countries with localized features, currencies, and legal documents.',
+                  question: "What countries do you support?",
+                  answer:
+                    "We currently support 50+ countries with localized features, currencies, and legal documents.",
                 },
               ].map((faq, index) => (
                 <motion.div
