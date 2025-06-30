@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { useEstateStore } from '@/lib/store';
-import { PublicHeader } from '@/components/layout/public-header';
-import { HeroSection } from '@/components/public/hero-section';
-import { FeaturesSection } from '@/components/public/features-section';
-import { TestimonialsSection } from '@/components/public/testimonials-section';
-import { PricingSection } from '@/components/public/pricing-section';
-import { Footer } from '@/components/public/footer';
-import { DashboardApp } from '@/components/dashboard/dashboard-app';
+import { PublicHeader } from "@/components/layout/public-header";
+import { useEstateStore } from "@/lib/store";
+
+import { DashboardApp } from "@/components/dashboard/dashboard-app";
+import { FeaturesSection } from "@/components/publicComp/features-section";
+import { Footer } from "@/components/publicComp/footer";
+import { HeroSection } from "@/components/publicComp/hero-section";
+import { PricingSection } from "@/components/publicComp/pricing-section";
+import { TestimonialsSection } from "@/components/publicComp/testimonials-section";
 
 export default function Home() {
   const { isAuthenticated } = useEstateStore();
